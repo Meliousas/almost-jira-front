@@ -12,14 +12,14 @@ import { SignInComponent } from './user/sign-in/sign-in.component';
 
 const appRoutes: Routes = [
   // { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-   { path: '', component: HomeComponent },
+   { path: 'home', component: HomeComponent },
    { path: 'login', component: UserComponent,
      children: [{ path: '', component: SignInComponent} ]},
    { path: 'register', component: UserComponent,
      children: [{ path: '', component: SignUpComponent} ]},
 
   // otherwise redirect to home
-  { path: '**', redirectTo: '' }
+  { path: '**', redirectTo: 'home' }
 ];
 
 @NgModule({
