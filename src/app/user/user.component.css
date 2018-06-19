@@ -36,7 +36,6 @@
   font-size: 22px;
 }
 
-.header a.active {
-  background-color: #074e69;
-  color: whitesmoke;
+.container a.active{
+  text-decoration: underline;
 }
