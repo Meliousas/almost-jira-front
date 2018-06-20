@@ -12,26 +12,29 @@ export class UserService {
   readonly rootUrl = 'http://localhost:8080';
   constructor(private http: HttpClient, private router: Router) {}
 
-  private loggedIn = new BehaviorSubject<boolean>(false);
+  public loggedIn = new BehaviorSubject<boolean>(false);
 
   get isLoggedIn() {
     return this.loggedIn.asObservable();
   }
+
   registerUser(user: User) {
     const body = {
       username: user.username,
       password: user.password
     };
-
-    return this.http.post(this.rootUrl + '/api/account/register', body);
+    const reqHeader = new HttpHeaders({ 'No-Auth': 'True'});
+    return this.http.post(this.rootUrl + '/api/account/register', body, { headers: reqHeader} );
   }
 
   authenticateUser(username, password) {
     const data = 'username=' + username + '&password=' + password;
-    const reqHeader = new HttpHeaders({'Content-Type': 'application/x-www-urlencoded'});
-    this.loggedIn.next(true);
-
+    const reqHeader = new HttpHeaders({'Content-Type': 'application/x-www-urlencoded', 'No-Auth': 'True'});
     return this.http.post(this.rootUrl + '/api/account/login', data, {headers: reqHeader});
+  }
+
+  getUserCategories() {
+    return this.http.get(this.rootUrl + 'api/category/all');
   }
 
   logout() {
