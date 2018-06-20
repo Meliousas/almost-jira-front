@@ -27,6 +27,13 @@ export class SignUpComponent implements OnInit {
         password: ''
       };
     }
+  }
 
+  OnSubmit(form: NgForm) {
+    this.userService.registerUser(form.value).subscribe((data: any) => {
+        if (data.Succedded === true) {
+          this.resetForm();
+        }
+      } );
   }
 }
