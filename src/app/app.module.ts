@@ -12,9 +12,11 @@ import { SignInComponent } from './user/sign-in/sign-in.component';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {UserService} from './user/shared/user.service';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import {AuthGuard} from './auth/auth.guard';
 
 const appRoutes: Routes = [
-  // { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
    { path: 'home', component: HomeComponent },
    { path: 'login', component: UserComponent,
      children: [{ path: '', component: SignInComponent} ]},
@@ -33,7 +35,8 @@ const appRoutes: Routes = [
     HomeComponent,
     UserComponent,
     SignUpComponent,
-    SignInComponent
+    SignInComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +44,7 @@ const appRoutes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [UserService],
+  providers: [UserService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

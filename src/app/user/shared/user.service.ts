@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {User} from './user.model';
-import {Observable} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +10,13 @@ import {Observable} from 'rxjs';
 export class UserService {
 
   readonly rootUrl = 'http://localhost:8080';
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
+  private loggedIn = new BehaviorSubject<boolean>(false);
+
+  get isLoggedIn() {
+    return this.loggedIn.asObservable();
+  }
   registerUser(user: User) {
     const body = {
       username: user.username,
@@ -19,5 +25,20 @@ export class UserService {
 
     return this.http.post(this.rootUrl + '/api/account/register', body);
   }
+
+  authenticateUser(username, password) {
+    const data = 'username=' + username + '&password=' + password;
+    const reqHeader = new HttpHeaders({'Content-Type': 'application/x-www-urlencoded'});
+    this.loggedIn.next(true);
+
+    return this.http.post(this.rootUrl + '/api/account/login', data, {headers: reqHeader});
+  }
+
+  logout() {
+    localStorage.removeItem('userToken');
+    this.loggedIn.next(false);
+    this.router.navigate(['/login']);
+  }
+
 
 }

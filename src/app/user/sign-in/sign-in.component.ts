@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {UserService} from '../shared/user.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-sign-in',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SignInComponent implements OnInit {
 
-  constructor() { }
+  constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit() {
   }
 
+  OnSubmit(username, password) {
+    this.userService.authenticateUser(username, password).subscribe((data: any) => {
+      localStorage.setItem('userToken', data.access_token);
+      this.router.navigate(['/dashboard']);
+    });
+  }
 }
