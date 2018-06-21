@@ -28,9 +28,13 @@ export class UserService {
   }
 
   authenticateUser(username, password) {
-    const data = 'username=' + username + '&password=' + password;
+    const body = {
+      username: username,
+      password: password
+    };
+  //  const data = 'username=' + username + '&password=' + password;
     const reqHeader = new HttpHeaders({'Content-Type': 'application/x-www-urlencoded', 'No-Auth': 'True'});
-    return this.http.post(this.rootUrl + '/api/account/login', data, {headers: reqHeader});
+    return this.http.post(this.rootUrl + '/api/account/login', body, {headers: reqHeader});
   }
 
   getUserCategories() {
