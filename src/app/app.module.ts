@@ -15,6 +15,8 @@ import {UserService} from './user/shared/user.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import {AuthGuard} from './auth/auth.guard';
 import {AuthInterceptor} from './auth/auth.interceptor';
+import {APP_BASE_HREF} from '@angular/common';
+
 
 const appRoutes: Routes = [
    { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
@@ -50,7 +52,8 @@ const appRoutes: Routes = [
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
-    }],
+    },
+    {provide: APP_BASE_HREF, useValue : '/'}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
