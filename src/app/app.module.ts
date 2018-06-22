@@ -19,8 +19,8 @@ import {APP_BASE_HREF} from '@angular/common';
 
 
 const appRoutes: Routes = [
-   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-   { path: 'home', component: HomeComponent },
+   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
+   { path: 'home', component: HomeComponent},
    { path: 'login', component: UserComponent,
      children: [{ path: '', component: SignInComponent} ]},
    { path: 'register', component: UserComponent,

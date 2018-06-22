@@ -32,8 +32,7 @@ export class UserService {
       username: username,
       password: password
     };
-  //  const data = 'username=' + username + '&password=' + password;
-    const reqHeader = new HttpHeaders({'Content-Type': 'application/x-www-urlencoded', 'No-Auth': 'True'});
+    const reqHeader = new HttpHeaders({'Content-Type': 'application/json', 'No-Auth': 'True'});
     return this.http.post(this.rootUrl + '/api/account/login', body, {headers: reqHeader});
   }
 
