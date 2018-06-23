@@ -8,11 +8,11 @@ import {UserService} from '../user/shared/user.service';
 })
 export class DashboardComponent implements OnInit {
 
-  userCategories: Array<any>;
+  userBoards: Array<any>;
 
   constructor(private userService: UserService) {
-    this.userService.getUserCategories().subscribe((data: any) => {
-      this.userCategories = data;
+    this.userService.getUserBoards().subscribe((data: any) => {
+      this.userBoards = data;
     });
   }
 

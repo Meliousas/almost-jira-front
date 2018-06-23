@@ -36,8 +36,8 @@ export class UserService {
     return this.http.post(this.rootUrl + '/api/account/login', body, {headers: reqHeader});
   }
 
-  getUserCategories() {
-    return this.http.get(this.rootUrl + 'api/category/all');
+  getUserBoards() {
+    return this.http.get(this.rootUrl + 'api/boards/all');
   }
 
   logout() {
