@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from '../shared/user.service';
 import {Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-sign-in',
@@ -9,7 +10,7 @@ import {Router} from '@angular/router';
 })
 export class SignInComponent implements OnInit {
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private userService: UserService, private router: Router, private toastr: ToastrService) { }
 
   ngOnInit() {
   }
@@ -19,6 +20,8 @@ export class SignInComponent implements OnInit {
       localStorage.setItem('userToken', data.access_token);
       this.userService.loggedIn.next(true);
       this.router.navigate(['/dashboard']);
-    });
+      this.toastr.success('Logged in');
+    },
+    err => this.toastr.error('Invalid data passed. Try again.'));
   }
 }

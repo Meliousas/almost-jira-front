@@ -23,7 +23,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "../almost-jira-front/node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": []
           },

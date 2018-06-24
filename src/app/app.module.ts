@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { FooterComponent } from './home/footer/footer.component';
@@ -16,6 +17,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import {AuthGuard} from './auth/auth.guard';
 import {AuthInterceptor} from './auth/auth.interceptor';
 import {APP_BASE_HREF} from '@angular/common';
+import {ToastrModule} from 'ngx-toastr';
 
 
 const appRoutes: Routes = [
@@ -45,7 +47,13 @@ const appRoutes: Routes = [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 5000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+    })
   ],
   providers: [UserService, AuthGuard,
     {
