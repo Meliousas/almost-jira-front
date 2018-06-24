@@ -18,7 +18,7 @@ export class UserService {
     return this.loggedIn.asObservable();
   }
 
-  registerUser(user: User) {
+  registerUser(user: User): Observable<any> {
     const body = {
       username: user.username,
       password: user.password
@@ -27,7 +27,7 @@ export class UserService {
     return this.http.post(this.rootUrl + '/api/account/register', body, { headers: reqHeader} );
   }
 
-  authenticateUser(username, password) {
+  authenticateUser(username, password): Observable<any> {
     const body = {
       username: username,
       password: password

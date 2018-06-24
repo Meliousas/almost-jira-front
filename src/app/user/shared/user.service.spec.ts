@@ -16,6 +16,7 @@ import {AuthInterceptor} from '../../auth/auth.interceptor';
 import {BrowserModule} from '@angular/platform-browser';
 import {FooterComponent} from '../../home/footer/footer.component';
 import {APP_BASE_HREF} from '@angular/common';
+import {User} from './user.model';
 const appRoutes: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
   { path: 'home', component: HomeComponent},
@@ -58,5 +59,39 @@ describe('UserService', () => {
 
   it('should be created', inject([UserService], (service: UserService) => {
     expect(service).toBeTruthy();
+
+    expect(service).toBeDefined();
+  }));
+  it('should create new user', inject([UserService], (service: UserService) => {
+    const body = new User();
+
+    body.username = 'username';
+    body.password = 'password';
+    expect(service.registerUser(body).subscribe(
+      (successResult) => {
+        expect(successResult.status).toBe(201);
+      }));
+  }));
+
+  it('should login into freshly created user', inject([UserService], (service: UserService) => {
+    const body = new User();
+
+    body.username = 'username';
+    body.password = 'password';
+    expect(service.authenticateUser(body.username, body.password).subscribe(
+      (successResult) => {
+        expect(successResult.status).toBe(200);
+      }));
+  }));
+
+  it('should fail logging in', inject([UserService], (service: UserService) => {
+    const body = new User();
+
+    body.username = 'iWillFail';
+    body.password = 'iWillFail';
+    expect(service.authenticateUser(body.username, body.password).subscribe(
+      (successResult) => {
+        expect(successResult.status).toBe(500);
+      }));
   }));
 });

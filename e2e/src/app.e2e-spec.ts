@@ -9,6 +9,17 @@ describe('workspace-project App', () => {
 
   it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Welcome to almost-jira-front!');
+    expect(page.getParagraphText()).toEqual('Almost Jira');
   });
+
+  it('should create navigation bar', () => {
+    page.navigateTo();
+    expect(page.getNavbarElement()).toBeTruthy();
+  });
+
+  // it('should render 3 buttons for not signed in user', () => {
+  //   page.navigateTo();
+  //
+  //   expect(page.getNavbarElement());
+  // });
 });
