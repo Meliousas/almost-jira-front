@@ -22,6 +22,6 @@ export class SignInComponent implements OnInit {
       this.router.navigate(['/dashboard']);
       this.toastr.success('Logged in');
     },
-    err => this.toastr.error('Invalid data passed. Try again.'));
+    err => this.toastr.error('Invalid data passed, try again'));
   }
 }
