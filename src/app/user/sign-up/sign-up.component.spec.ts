@@ -16,6 +16,8 @@ import {BrowserModule} from '@angular/platform-browser';
 import {FooterComponent} from '../../home/footer/footer.component';
 import {UserService} from '../shared/user.service';
 import {APP_BASE_HREF} from '@angular/common';
+import {ToastrModule} from 'ngx-toastr';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 const appRoutes: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
   { path: 'home', component: HomeComponent},
@@ -47,7 +49,13 @@ describe('SignUpComponent', () => {
         BrowserModule,
         FormsModule,
         HttpClientModule,
-        RouterModule.forRoot(appRoutes)
+        RouterModule.forRoot(appRoutes),
+        BrowserAnimationsModule,
+        ToastrModule.forRoot({
+          timeOut: 5000,
+          positionClass: 'toast-bottom-right',
+          preventDuplicates: true,
+        })
       ],
       providers: [UserService, AuthGuard,
         {
