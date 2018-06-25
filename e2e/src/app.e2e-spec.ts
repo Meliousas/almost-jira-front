@@ -18,11 +18,26 @@ describe('workspace-project App', () => {
     expect(page.getNavbarElement()).toBeTruthy();
   });
 
-  it('should render 3 buttons for not signed in user', () => {
-    page.navigateTo();
-   // const headerRight = page.getNavbarElement().element(by.className('header-right'));
-   // const buttons = page.getNavbarElement().element(by.className('header-right')).all(by.css('routerLink'));
+  it('Login functionallity should work for registered user', () => {
+    
+    console.log('Given I have opened login page);
+    
+    browser.driver.get('http://localhost:4200/register');
+    const user = browser.driver.findElement(by.name('username'));
+    const password = browser.driver.findElement(by.name('password'));
+    const button = element(by.className('submit'));
 
-//    expect(buttons.count()).toEqual(3);
-  });
+    console.log('When i provide my credentials');
+    
+    user.sendKeys('first');
+    password.sendKeys('nope');
+
+    console.log('Then I should be logged in and dashboard should by displayed');
+    
+    expect(user.getAttribute('value')).toEqual('first');
+    expect(password.getAttribute('value')).toEqual('nope');
+    button.click().then(() => {
+      browser.waitForAngular();
+      expect(browser.driver.get('http://localhost:4200/dashboard'));
+    });
 });
