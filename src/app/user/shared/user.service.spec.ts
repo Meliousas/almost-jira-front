@@ -59,7 +59,6 @@ describe('UserService', () => {
 
   it('should be created', inject([UserService], (service: UserService) => {
     expect(service).toBeTruthy();
-
     expect(service).toBeDefined();
   }));
   it('should create new user', inject([UserService], (service: UserService) => {

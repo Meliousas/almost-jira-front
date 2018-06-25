@@ -1,4 +1,5 @@
 import { AppPage } from './app.po';
+import {by, element} from 'protractor';
 
 describe('workspace-project App', () => {
   let page: AppPage;
@@ -17,9 +18,11 @@ describe('workspace-project App', () => {
     expect(page.getNavbarElement()).toBeTruthy();
   });
 
-  // it('should render 3 buttons for not signed in user', () => {
-  //   page.navigateTo();
-  //
-  //   expect(page.getNavbarElement());
-  // });
+  it('should render 3 buttons for not signed in user', () => {
+    page.navigateTo();
+   // const headerRight = page.getNavbarElement().element(by.className('header-right'));
+   // const buttons = page.getNavbarElement().element(by.className('header-right')).all(by.css('routerLink'));
+
+//    expect(buttons.count()).toEqual(3);
+  });
 });
