@@ -20,7 +20,7 @@ describe('workspace-project App', () => {
 
   it('Login functionallity should work for registered user', () => {
     
-    console.log('Given I have opened login page);
+    console.log('Given I have opened login page');
     
     browser.driver.get('http://localhost:4200/register');
     const user = browser.driver.findElement(by.name('username'));
